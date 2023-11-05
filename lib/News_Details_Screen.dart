@@ -12,6 +12,7 @@ class News_Details extends StatelessWidget {
       {required this.product, required this.Category, required this.num});
 
   late String Fullcontent = product['content'];
+
   void _launchURL() async {
     String url = product['url'];
     if (await canLaunch(url)) {
@@ -20,6 +21,7 @@ class News_Details extends StatelessWidget {
       throw 'Could not launch $url';
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -164,7 +166,7 @@ class News_Details extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(right: 230.0,left: 15),
+                padding: const EdgeInsets.only(right: 230.0, left: 15),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     elevation: 5,
@@ -172,22 +174,23 @@ class News_Details extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
-                  child: Row(
-                    children: [
-                      Container(
-                          child: Text("Read More"),
-                        decoration: BoxDecoration(
-                          color: Colors.blue
+                  child: Container(
+                    height: 40,
+                    child: Row(children: [
+                      Text("Read More"),
+                      SizedBox(
+                        width: 13,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: VerticalDivider(
+                          color: Colors.white,
+                          thickness: 1.0,
+                          width: 10,
                         ),
                       ),
-                      SizedBox(width: 13,),
-                      VerticalDivider(
-                        color: Colors.black,
-                        thickness: 5.0,
-                        width: 10,
-                      ),
                       Icon(Icons.keyboard_arrow_right, color: Colors.white),
-                    ],
+                    ]),
                   ),
                   onPressed: () {
                     _launchURL();
