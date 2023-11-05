@@ -15,7 +15,7 @@ class _newsState extends State<news> {
     'Business',
     'Wall Street Journal',
     'Apple News',
-    'Tesla'
+    'Sports'
   ];
   String dropdownValue = 'Business';
 
@@ -53,11 +53,11 @@ class _newsState extends State<news> {
           'apikey': 'fce0e55e69504881ac35129f43218788'
         });
       }
-      if (dropdownValue == "Tesla") {
+      if (dropdownValue == "Sports") {
         response = await Dio()
             .get('https://newsapi.org/v2/everything', queryParameters: {
-          'q': 'tesla',
-          'from': '2023-10-01',
+          'q': 'sports',
+          'from': '2023-10-05',
           'sortBy': 'publishedAt',
           'apikey': 'fce0e55e69504881ac35129f43218788'
         });
@@ -126,6 +126,10 @@ class _newsState extends State<news> {
                 separatorBuilder: (context, index) {
                   return SizedBox(
                     height: 10,
+                 child :  Divider(
+                      color: Colors.black, // Set the color of the divider
+                      thickness: 1.0,       // Set the thickness of the divider
+                    ),
                   );
                 },
                 // physics: NeverScrollableScrollPhysics(),
