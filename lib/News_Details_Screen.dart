@@ -166,7 +166,7 @@ class News_Details extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(right: 230.0, left: 15),
+                padding: const EdgeInsets.only(right: 225.0, left: 15),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     elevation: 5,
@@ -177,7 +177,9 @@ class News_Details extends StatelessWidget {
                   child: Container(
                     height: 40,
                     child: Row(children: [
-                      Text("Read More"),
+                      Text("Read More",style: TextStyle(
+                        fontWeight: FontWeight.bold,fontSize: 15
+                      ),),
                       SizedBox(
                         width: 13,
                       ),
