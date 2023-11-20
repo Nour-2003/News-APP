@@ -57,7 +57,7 @@ class _newsState extends State<news> {
         response = await Dio()
             .get('https://newsapi.org/v2/everything', queryParameters: {
           'q': 'sports',
-          'from': '2023-10-05',
+          'from': '2023-10-20',
           'sortBy': 'publishedAt',
           'apikey': 'fce0e55e69504881ac35129f43218788'
         });

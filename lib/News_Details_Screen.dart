@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class News_Details extends StatelessWidget {
+class News_Details extends StatefulWidget {
   final Map<String, dynamic> product;
   String Category;
   int num;
@@ -11,10 +11,15 @@ class News_Details extends StatelessWidget {
   News_Details(
       {required this.product, required this.Category, required this.num});
 
-  late String Fullcontent = product['content'];
+  @override
+  State<News_Details> createState() => _News_DetailsState();
+}
 
+class _News_DetailsState extends State<News_Details> {
+  late String Fullcontent = widget.product['content'];
+  bool isLoveActivated = false;
   void _launchURL() async {
-    String url = product['url'];
+    String url = widget.product['url'];
     if (await canLaunch(url)) {
       await launch(url);
     } else {
@@ -26,13 +31,17 @@ class News_Details extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.red,
+        // backgroundColor: isLoveActivated ?Colors.white :Colors.red,
         child: Icon(
-          Icons.favorite_border_outlined,
-          color: Colors.white,
-          size: 30,
+          Icons.favorite,
+          color:isLoveActivated ? Colors.red : Colors.white,
+          size: 35,
         ),
-        onPressed: () {},
+        onPressed: () {
+         setState(() {
+           isLoveActivated = !isLoveActivated;
+         });
+        },
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -47,9 +56,9 @@ class News_Details extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     child: ClipRRect(
                       child: Image.network(
-                        product["urlToImage"] == null
+                        widget.product["urlToImage"] == null
                             ? "https://st.depositphotos.com/1011646/1255/i/450/depositphotos_12553000-stock-photo-breaking-news-screen.jpg"
-                            : product["urlToImage"],
+                            : widget.product["urlToImage"],
                         fit: BoxFit.cover,
                       ),
                       borderRadius: BorderRadius.only(
@@ -85,7 +94,7 @@ class News_Details extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              this.Category,
+                              this.widget.Category,
                               style: TextStyle(color: Colors.white),
                             ),
                           ),
@@ -93,7 +102,7 @@ class News_Details extends StatelessWidget {
                         SizedBox(
                           width: 7,
                         ),
-                        if (this.num < 10)
+                        if (this.widget.num < 10)
                           Container(
                             decoration: BoxDecoration(
                                 color: Colors.red,
@@ -129,7 +138,7 @@ class News_Details extends StatelessWidget {
                 padding: const EdgeInsets.only(
                     top: 10, right: 20, left: 20, bottom: 10),
                 child: Text(
-                  product["title"],
+                  widget.product["title"],
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
                 ),
               ),
@@ -143,7 +152,7 @@ class News_Details extends StatelessWidget {
                           TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
                     ),
                     Text(
-                      product["publishedAt"],
+                      widget.product["publishedAt"],
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
                     ),
@@ -161,7 +170,7 @@ class News_Details extends StatelessWidget {
                 padding: const EdgeInsets.only(
                     top: 10, right: 20, left: 20, bottom: 10),
                 child: Text(
-                  product['description'],
+                  widget.product['description'],
                   style: GoogleFonts.openSans(fontSize: 20),
                 ),
               ),

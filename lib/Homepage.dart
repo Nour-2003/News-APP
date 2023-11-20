@@ -77,8 +77,14 @@ class _homePageState extends State<homePage> {
                 SizedBox(height: 10,),
                 if (jasonList.isNotEmpty) ListView.separated(
                     scrollDirection: Axis.vertical,
-                    separatorBuilder: (context,index){
-                      return SizedBox(height: 10,);
+                    separatorBuilder: (context, index) {
+                      return SizedBox(
+                        height: 10,
+                        child :  Divider(
+                          color: Colors.black, // Set the color of the divider
+                          thickness: 1.0,       // Set the thickness of the divider
+                        ),
+                      );
                     },
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,

@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MyHomePage(),
+      home: Splash(),
     );
   }
 }
@@ -68,6 +68,51 @@ class _MyHomePageState extends State<MyHomePage> {
             _currentIndex = index;
           });
         },
+      ),
+    );
+  }
+}
+class Splash extends StatefulWidget {
+  const Splash({Key? key}) : super(key: key);
+
+  @override
+  State<Splash> createState() => _SplashState();
+}
+
+class _SplashState extends State<Splash> {
+  @override
+  void initState() {
+    super.initState();
+    _navigatetohome();
+  }
+
+  _navigatetohome() async {
+    await Future.delayed(Duration(milliseconds: 2000), () {});
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => MyHomePage()));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.white,Colors.redAccent],
+          ),
+        ),
+        child: Center(
+          child: Text(
+            'My News App',
+            style: TextStyle(
+              fontSize: 24.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
+        ),
       ),
     );
   }
